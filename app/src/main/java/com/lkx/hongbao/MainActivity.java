@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         mSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                mDelay.setText(progress+"ms");
+                mDelay.setText(progress + "ms");
             }
 
             @Override
@@ -60,28 +60,31 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
                 Toast.makeText(MainActivity.this, "当有新的红包出现时,将会延迟" + seekBar.getProgress() + "ms后拆开", Toast.LENGTH_LONG).show();
-                SpUtil.saveString(MainActivity.this,"delay",String.valueOf(seekBar.getProgress()));
+                SpUtil.saveString(MainActivity.this, "delay", String.valueOf(seekBar.getProgress()));
             }
         });
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mServiceSwitch.setChecked(isStartAccessibilityService(this, getPackageName() + "/.HongBaoService"));
+    }
+
     private void initSwitch() {
-        if (isStartAccessibilityService(this, getPackageName()+"/.HongBaoService")) {
-            mServiceSwitch.setChecked(true);
-        }
         mServiceSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 //跳转至无障碍界面
                 Intent accessibleIntent = new Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS);
                 startActivity(accessibleIntent);
-                Toast.makeText(MainActivity.this, "点击微信红包辅助->"+(isChecked?"开启":"关闭")+"即可", Toast.LENGTH_LONG).show();
+                Toast.makeText(MainActivity.this, "点击微信红包辅助->" + (isChecked ? "开启" : "关闭") + "即可", Toast.LENGTH_LONG).show();
             }
         });
     }
 
     //判断服务是否正在运行
-    public static boolean isStartAccessibilityService(Context context, String name){
+    public static boolean isStartAccessibilityService(Context context, String name) {
         AccessibilityManager am = (AccessibilityManager) context.getSystemService(Context.ACCESSIBILITY_SERVICE);
         List<AccessibilityServiceInfo> serviceInfos = am.getEnabledAccessibilityServiceList(AccessibilityServiceInfo.FEEDBACK_GENERIC);
         for (AccessibilityServiceInfo info : serviceInfos) {
