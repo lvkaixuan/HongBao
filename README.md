@@ -1,9 +1,10 @@
-####马上过年了,又到了红包满天飞的季节,emmmm...先来看效果图####
+## Android微信红包辅助 ##
+### 马上过年了,又到了红包满天飞的季节,emmmm...先来看效果图 ###
 ![Alt text](https://github.com/lvkaixuan/HongBao/blob/master/QQ20180202-163554.gif)
 ### 实现思路 ###
  - 使用AccessibilityService监听红包消息
  - 当有红包的时候模拟点击
-###核心代码###
+### 核心代码 ###
 
 ```
 case AccessibilityEvent.TYPE_WINDOW_CONTENT_CHANGED: //内容改变时
@@ -43,7 +44,7 @@ case AccessibilityEvent.TYPE_WINDOW_CONTENT_CHANGED: //内容改变时
     break;
 ```
 
-###项目###
+### 项目 ###
 
  - GitHub地址: https://github.com/lvkaixuan/HongBao
  - Demo下载: https://fir.im/wechathongbao
