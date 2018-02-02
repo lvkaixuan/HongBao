@@ -7,8 +7,6 @@ import android.util.Log;
 import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityNodeInfo;
 
-import java.util.logging.Handler;
-
 /**
  * 作者: LKX
  * 时间: 2018/1/25
